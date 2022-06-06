@@ -1,0 +1,20 @@
+[
+	{
+		"title": "Avengers: Endgame",
+		"price": 50,
+		"thumbnail": "https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
+		"id": 1
+	},
+	{
+		"title": "Iron Man 2",
+		"price": 30,
+		"thumbnail": "https://www.imdb.com/title/tt1228705/mediaviewer/rm1059163136/?ref_=tt_ov_i",
+		"id": 2
+	},
+	{
+		"name": "Captain America: Civil War",
+		"price": 200,
+		"thumbnail": "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
+		"id": 3
+	}
+]
