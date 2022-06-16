@@ -43,6 +43,7 @@ class Contenedor {
                     console.log('The element does not exist');
                 } else {
                     console.log(result);
+                    return result;
                 }
             }
         });
@@ -51,6 +52,7 @@ class Contenedor {
     async getAll() {
         let jsonInfo = await this.getData();
         console.log(jsonInfo);
+        return jsonInfo;
     }
 
     async deleteById(id) {
@@ -70,5 +72,4 @@ class Contenedor {
     }
 }
 
-let contenedor = new Contenedor('products.json');
-contenedor.save({name: 'Captain America: Civil War', price: 200, thumbnail: 'https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SY1000_CR0,0,674,1000_AL_.jpg'});
+module.exports = Contenedor;
