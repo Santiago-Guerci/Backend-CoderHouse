@@ -1,12 +1,12 @@
-const Contenedor = require('../container');
+const Contenedor = require('./container');
 const express = require('express');
 const { Router } = express;
 let router = new Router();
 
-const productos = new Contenedor('../products.json');
+const productos = new Contenedor('./Routes/products.json');
 
 router.get('/', async (req, res) => {
-    await res.send(productos);
+    res.send(await productos.getAll());
 });
 
 router.get('/:id', (req, res) => {

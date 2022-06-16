@@ -51,7 +51,7 @@ class Contenedor {
 
     async getAll() {
         let jsonInfo = await this.getData();
-        console.log(jsonInfo);
+        // console.log(jsonInfo);
         return jsonInfo;
     }
 
