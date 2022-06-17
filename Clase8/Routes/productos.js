@@ -23,11 +23,10 @@ router.post('/', (req, res) => {
     let newProduct = {
         title,
         price,
-        thumbnail,
-        id: productos.length + 1
+        thumbnail
     }
-    productos.push(newProduct);
-    res.send(newProduct);
+    productos.save(newProduct);
+    res.redirect('/');
 });
 
 router.put('/:id', (req, res) => {

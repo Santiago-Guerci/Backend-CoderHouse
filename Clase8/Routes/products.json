@@ -16,5 +16,23 @@
 		"price": 200,
 		"thumbnail": "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SY1000_CR0,0,674,1000_AL_.jpg",
 		"id": 3
+	},
+	{
+		"title": "Hola",
+		"price": 10,
+		"thumbnail": "google.com",
+		"id": 4
+	},
+	{
+		"title": "Hola",
+		"price": 10,
+		"thumbnail": "google.com",
+		"id": 5
+	},
+	{
+		"title": "Hola",
+		"price": 10,
+		"thumbnail": "google.com",
+		"id": 6
 	}
 ]
