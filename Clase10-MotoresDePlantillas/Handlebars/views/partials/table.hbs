@@ -1,20 +1,26 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Título</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Descripción</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each data}}
-        <tr>
-            <th scope="row">{{this.id}}</th>
-            <td>{{this.title}}</td>
-            <td>${{this.price}}</td>
-            <td>{{this.description}}</td>
-        </tr>
-    {{/each}}
-  </tbody>
-</table>
+{{#if (data.length)}}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Título</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Imagen</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+          <tr>
+              <th scope="row">{{this.id}}</th>
+              <td>{{this.title}}</td>
+              <td>${{this.price}}</td>
+              <td> 
+                <img width="135" height="200" src={{this.thumbnail}} > 
+              </td>
+          </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  <p>No se encontraron productos</p>
+{{/if}}

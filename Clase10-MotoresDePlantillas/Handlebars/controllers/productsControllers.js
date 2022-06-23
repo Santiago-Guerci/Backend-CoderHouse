@@ -1,4 +1,4 @@
-const productos = [
+let productos = [
 	{
 		title: "Avengers: Endgame",
 		price: 50,
@@ -20,11 +20,11 @@ const productos = [
 ]
 
 const getFormulario = (req, res) => {
-    res.render('index.ejs');
+    res.render('index');
 }
 
 const getProductos = (req, res) => {
-    res.render('productos.ejs', {productos});
+    res.render('productos', {data: productos});
 }
 
 const addProducto = (req, res) => {
@@ -36,7 +36,6 @@ const addProducto = (req, res) => {
         thumbnail,
         id: productos.length + 1
     }
-
     productos.push(newProduct);
     res.redirect('/');
 }

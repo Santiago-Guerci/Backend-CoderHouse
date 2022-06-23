@@ -1,20 +1,26 @@
-<table class="table">
-    <thead>
-        <tr>
-        <th scope="col">#</th>
-        <th scope="col">Título</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Imagen</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% productos.forEach(function(pr) { %>
+<% if(productos.length) { %> 
+    <table class="table">
+        <thead>
             <tr>
-                <th scope="row"> <%= pr.id %> </th>
-                <td> <%= pr.title %> </td>
-                <td>$ <%= pr.price %> </td>
-                <td> <img width="135" height="200" src=<%= pr.thumbnail %> />  </td>
+            <th scope="col">#</th>
+            <th scope="col">Título</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Imagen</th>
             </tr>
-        <% }) %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% productos.forEach(pr => { %>
+                <tr>
+                    <th scope="row"> <%= pr.id %> </th>
+                    <td> <%= pr.title %> </td>
+                    <td>$ <%= pr.price %> </td>
+                    <td>
+                         <img width="135" height="200" src=<%= pr.thumbnail %> >  
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p>No hay productos disponibles</p>
+<% } %>  
