@@ -1,0 +1,14 @@
+table(class="table")
+    thead
+        tr
+            th(scope="col") #
+            th(scope="col") Título
+            th(scope="col") Precio
+            th(scope="col") Descripción
+    tbody
+        each pr in data
+            tr
+                th(scope="row")=pr.id
+                td=pr.title
+                td="$"+pr.price
+                td=pr.description

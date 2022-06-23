@@ -6,7 +6,11 @@ let router = new Router();
 const productos = new Contenedor('./Routes/products.json');
 
 router.get('/', async (req, res) => {
-    res.send(await productos.getAll());
+    try {
+        res.send(await productos.getAll());
+    } catch {
+        res.send({error: 'Error al mostrar todos los productos'});
+    }
 });
 
 router.get('/:id', (req, res) => {
@@ -14,19 +18,23 @@ router.get('/:id', (req, res) => {
     try {
         res.send(productos.getById(id));
     } catch {
-        res.status(404).send({error: 'Producto no encontrado'});
+        res.send({error: 'Producto no encontrado'});
     }
 });
 
 router.post('/', (req, res) => {
-    let {title, price, thumbnail} = req.body;
-    let newProduct = {
-        title,
-        price,
-        thumbnail
+    try {
+        let {title, price, thumbnail} = req.body;
+        let newProduct = {
+            title,
+            price,
+            thumbnail
+        }
+        productos.save(newProduct);
+        res.redirect('/');
+    } catch {
+        res.send({error: 'Error en petición POST'});
     }
-    productos.save(newProduct);
-    res.redirect('/');
 });
 
 router.put('/:id', (req, res) => {
@@ -39,7 +47,7 @@ router.put('/:id', (req, res) => {
         console.log('Producto actualizado');
         res.send(productos);
     } catch {
-        res.status(404).send({error: 'Producto no encontrado'});
+        res.send({error: 'Producto no encontrado'});
     }
 });
 
@@ -52,7 +60,7 @@ router.delete('/:id', (req, res) => {
             res.send('Se ha eliminado el producto con índice ' + id);
         }
     } catch {
-        res.status(404).send({error: 'Producto no encontrado'});
+        res.send({error: 'Producto no encontrado'});
     }
 });
 

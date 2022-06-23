@@ -1,0 +1,20 @@
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">#</th>
+        <th scope="col">Título</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% data.forEach(function(pr) { %>
+            <tr>
+                <th scope="row"> <%= pr.id %> </th>
+                <td> <%= pr.title %> </td>
+                <td>$ <%= pr.price %> </td>
+                <td> <%= pr.description %> </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
