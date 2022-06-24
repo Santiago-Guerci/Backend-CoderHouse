@@ -1,4 +1,4 @@
-{{#if (data.length)}}
+{{#if (productos.length)}}
   <table class="table">
     <thead>
       <tr>
@@ -9,11 +9,11 @@
       </tr>
     </thead>
     <tbody>
-      {{#each data}}
+      {{#each productos}}
           <tr>
-              <th scope="row">{{this.id}}</th>
-              <td>{{this.title}}</td>
-              <td>${{this.price}}</td>
+              <th scope="row"> {{this.id}} </th>
+              <td> {{this.title}} </td>
+              <td>$ {{this.price}} </td>
               <td> 
                 <img width="135" height="200" src={{this.thumbnail}} > 
               </td>

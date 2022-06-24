@@ -24,7 +24,7 @@ const getFormulario = (req, res) => {
 }
 
 const getProductos = (req, res) => {
-    res.render('productos', {data: productos});
+    res.render('productos', {productos});
 }
 
 const addProducto = (req, res) => {
