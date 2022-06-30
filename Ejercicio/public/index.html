@@ -23,7 +23,7 @@
     <main class="container">
         <h1>Ingrese un producto</h1>
 
-        <form action="/productos" method="post">
+        <form id="formProducts">
             <div class="mb-3">
                 <label for="title" class="form-label">Título</label>
                 <input type="text" class="form-control" id="title" placeholder="La Naranja Mecánica">
@@ -52,9 +52,20 @@
                 <tbody id="productos"></tbody>
             </table>
         </div>
-    </main>
 
+        <div style="display: flex;">
+            <div style="margin: 0 auto;">
+                <h2 style="color: blue; text-align: center;">Centro de Mensajes</h2>
+                <ul id="messagePool"></ul>
     
+                <form id="formMessage" style="margin-top: 50px; padding-bottom: 25px;">
+                    <input id="usernameInput" type="email" placeholder="Ingrese su email">
+                    <input id="messageInput" type="text" placeholder="Mensaje">
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+        </div>
+    </main>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="./client.socket.js"></script>

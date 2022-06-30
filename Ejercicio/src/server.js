@@ -4,6 +4,7 @@ const path = require('path')
 const { Server: IOServer } = require('socket.io')
 const expressServer = app.listen(8080, () => { console.log('Server running on port') })
 const io = new IOServer(expressServer)
+const messageArray = [];
 
 const productos = [
 	{
@@ -29,6 +30,19 @@ const productos = [
 app.use(express.static(path.join(__dirname, '../public')))
 
 io.on('connection', socket => {
-    console.log('Se conectó un cliente');
+    console.log(`Se conectó el id ${socket.id}`)
     socket.emit('server:products', productos);
+	socket.emit('server:message', messageArray);
+
+	socket.on('client:formProduct', productInfo => {
+		productos.push(productInfo);
+
+		io.emit('server:products', productos);
+	})
+
+	socket.on('client:message', messageInfo => {
+        messageArray.push(messageInfo)
+
+        io.emit('server:message', messageArray);
+    })
 })
