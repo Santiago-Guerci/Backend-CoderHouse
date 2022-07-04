@@ -28,7 +28,6 @@ const getProductos = (req, res) => {
 }
 
 const addProducto = (req, res) => {
-	console.log(req.body);
 	let {title, price, thumbnail} = req.body;
     let newProduct = {
         title,
@@ -36,6 +35,7 @@ const addProducto = (req, res) => {
         thumbnail,
         id: productos.length + 1
     }
+	console.log(newProduct)
     productos.push(newProduct);
     res.redirect('/');
 }
