@@ -1,27 +1,12 @@
 const express = require('express');
 const { Router } = express;
 let router = new Router();
+const { postCart, deleteCartById, getProductsOnCartById, postProductsOnCartById, deleteProductOfCartById } = require('../controllers/cartsControllers');
 
-router.post('/', (req, res) => {
-    try {
-        
-    } catch {
+router.post('/', postCart);
+router.delete('/:id', deleteCartById);
+router.get('/:id/productos', getProductsOnCartById);
+router.post('/:id/productos', postProductsOnCartById);
+router.delete('/:id/productos/:id_prod', deleteProductOfCartById);
 
-    }
-});
-
-router.delete('/:id', (req, res) => {
-
-});
-
-router.get('/:id/productos', (req, res) => {
-
-});
-
-router.post('/:id/productos', (req, res) => {
-
-});
-
-router.delete('/:id/productos/:id_prod', (req, res) => {
-
-});
+module.exports = router;

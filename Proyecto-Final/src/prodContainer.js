@@ -19,7 +19,8 @@ class Contenedor {
     async save(object) {
         let jsonInfo = await this.getData();
         let id = jsonInfo.length + 1;
-        let newObj = {...object, id};
+        let timestamp = Date.now();
+        let newObj = {...object, id, timestamp};
         jsonInfo.push(newObj);
         try {
             fs.promises.writeFile(this.url, JSON.stringify(jsonInfo, null, '\t'), 'utf-8');
@@ -51,7 +52,6 @@ class Contenedor {
 
     async getAll() {
         let jsonInfo = await this.getData();
-        // console.log(jsonInfo);
         return jsonInfo;
     }
 
