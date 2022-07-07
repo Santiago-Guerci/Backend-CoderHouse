@@ -1,11 +1,11 @@
 const Contenedor = require('../prodContainer');
-const productos = new Contenedor('../jsonFiles/products.json');
+const productos = new Contenedor('./src/jsonFiles/products.json');
 
 const getProductOrAll = async (req, res) => {
-    let id = req.params.id;
+    let id = parseInt(req.params.id);
     if(id) {
         try {
-            res.json(productos.getById(id));
+            res.json(await productos.getById(id));
         } catch {
             res.json({error: 'Producto no encontrado'})
         }
@@ -29,34 +29,24 @@ const postProduct = (req, res) => {
     }
 }
 
-const putProduct = (req, res) => {
-    let id = req.params.id;
+const putProduct = async (req, res) => {
+    let id = parseInt(req.params.id);
     try {
         let {name, description, code, thumbnail, price, stock} = req.body;
-        productos[id-1].name = name;
-        productos[id-1].description = description;
-        productos[id-1].code = code;
-        productos[id-1].thumbnail = thumbnail;
-        productos[id-1].price = price;
-        productos[id-1].stock = stock;
-        console.log('Producto actualizado');
-        res.json(productos);
-    } catch {
-        res.json({error: 'Producto no encontrado'});
+        let newProd = {name, description, code, thumbnail, price, stock};
+        res.json(await productos.updateProduct(id, newProd));
+    } catch (err){
+        res.json({error: 'Producto no encontrado. Codigo ' + err });
     }
 }
 
 const deleteProduct = (req, res) => {
-    let id = req.params.id;
+    let id = parseInt(req.params.id);
     try {
-        let index = id - 1;
-        if(index > -1) {
-            productos.splice(index, 1);
-            res.json('Se ha eliminado el producto con índice ' + id);
-        }
+        res.json(productos.deleteById(id));
     } catch {
         res.json({error: 'Producto no encontrado'});
     }
 }
 
-module.exports = { getProductOrAll, postProduct, putProduct, deleteProduct }
+module.exports = { productos, getProductOrAll, postProduct, putProduct, deleteProduct }

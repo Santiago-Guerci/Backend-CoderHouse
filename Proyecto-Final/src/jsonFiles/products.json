@@ -1,13 +1,13 @@
 [
 	{
 		"id": 1,
-		"timestamp": "04/12/2022",
+		"timestamp": "24/12/2022",
 		"name": "Reloj",
-		"description": "Aparato utilizado para medir el tiempo",
+		"description": "Aparato utilizado para medir tiempo",
 		"code": "watch",
-		"thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/clock-stopwatch-timer-time-256.png",
-		"price": 100,
-		"stock": 25 
+		"thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png",
+		"price": 19,
+		"stock": 20
 	},
 	{
 		"id": 2,
@@ -17,6 +17,6 @@
 		"code": "calculator",
 		"thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png",
 		"price": 80,
-		"stock": 40 
+		"stock": 40
 	}
 ]

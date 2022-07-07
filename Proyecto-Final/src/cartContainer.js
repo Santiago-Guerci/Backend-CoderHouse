@@ -25,6 +25,7 @@ class Carrito {
         try {
             fs.promises.writeFile(this.url, JSON.stringify(jsonInfo, null, '\t'), 'utf-8');
             console.log(`Cart id: ${id} has been created`);
+            return id;
         } catch (err) {
             console.log('There has been an error creating the cart');
         }
@@ -32,10 +33,8 @@ class Carrito {
 
     async emptyCart(id) {
         let jsonInfo = await this.getData();
-        console.log(jsonInfo[id]);
-        jsonInfo[id].products = []
-        // selectedCart.products = []
-        // let selectedCart = jsonInfo.find(item => item.id === id);
+        let thisCart = jsonInfo.find(item => item.id === id);
+        thisCart.products = []
         try {
             fs.promises.writeFile(this.url, JSON.stringify(jsonInfo, null, '\t'), 'utf-8');
             console.log(`The cart ${id} has been emptied`);
@@ -52,7 +51,7 @@ class Carrito {
             fs.promises.writeFile(this.url, JSON.stringify(restOfCarts, null, '\t'), 'utf-8');
             console.log(`The cart ${id} has been deleted`);
         } catch (err) {
-            console.timeLog(`Error deleting cart ${id}. Error: ${err}`);
+            console.log(`Error deleting cart ${id}. Error: ${err}`);
             throw err;
         }
     }
@@ -63,7 +62,32 @@ class Carrito {
         return thisCart.products;
     }
 
-    //Armar métodos para las rutas que faltan
+    //De los productos que ya tengo, cada prod tiene un id. Lo agarro, y lo meto en el cart solicitado (lo agarro por req.body)
+    async postProductOnCart(id, myProd) {
+        console.log(myProd);
+        let jsonInfo = await this.getData();
+        let thisCart = jsonInfo.find(item => item.id === id)
+        thisCart.products.push(myProd);
+        try {
+            fs.promises.writeFile(this.url, JSON.stringify(jsonInfo, null, '\t'), 'utf-8');
+            console.log(`The product ${myProd.id} has been added to cart ${id}`);
+        } catch (err) {
+            console.log(`Error pushing product in cart`);
+        }
+    }
+
+    async deleteProductOfCart(id, prodId) {
+        let jsonInfo = await this.getData()
+        let cartProds = await this.getProductsById(id);
+        let index = cartProds.indexOf(prodId)
+        jsonInfo[id-1].products.splice(index, 1)
+        try {
+            fs.promises.writeFile(this.url, JSON.stringify(jsonInfo, null, '\t'), 'utf-8')
+            console.log(`The product ${prodId} has been deleted from cart ${id}`);
+        } catch (err) {
+            console.log(`Error deleting product from cart`);
+        }
+    }
 
 }
 
