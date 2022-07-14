@@ -11,28 +11,32 @@ app.use(express.static(path.join(__dirname, '../public')))
 
 //Traigo las clases de producto y mensajes.
 const Contenedor = require('../utils/prodContainer')
-const Mensajes = require('../utils/messContainer')
+const Mensajes = require('../utils/msgContainer')
 
 //Me traigo las bases de datos y los datos en ellas.
-const productsDB = require('./db/database').mysqlConnection;
+const productsDB = require('../db/database').mysqlConnection;
 const products = new Contenedor(productsDB, 'products');
-const messagesDB = require('./db/database').sqliteConnection;
+const messagesDB = require('../db/database').sqliteConnection;
 const messagesPool = new Mensajes(messagesDB, 'messages');
 
-io.on('connection', socket => {
+io.on('connection', async socket => {
     console.log(`Se conectó el id ${socket.id}`)
-    socket.emit('server:products', productos);
-	socket.emit('server:message', messageArray);
 
-	socket.on('client:formProduct', productInfo => {
-		productos.push(productInfo);
+	const mensajes = await messagesPool.getAll();
+	const productos = await products.getAll();
+
+    socket.emit('server:products', productos);
+	socket.emit('server:message', mensajes);
+
+	socket.on('client:formProduct', async productInfo => {
+		products.save(productInfo);
 
 		io.emit('server:products', productos);
 	})
 
-	socket.on('client:message', messageInfo => {
-        messageArray.push(messageInfo)
+	socket.on('client:message', async messageInfo => {
+        messagesPool.save(messageInfo)
 
-        io.emit('server:message', messageArray);
+        io.emit('server:message', mensajes);
     })
 })
