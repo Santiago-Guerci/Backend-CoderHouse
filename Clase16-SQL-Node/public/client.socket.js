@@ -24,8 +24,13 @@ formMessage.addEventListener('submit', event => {
 
     const username = usernameInput.value;
     const message = messageInput.value;
+    const date = new Date();
+    let day = String(date.getDate()).padStart(2, '0');
+    let month = String(date.getMonth() + 1).padStart(2, '0');
+    let year = date.getFullYear();
+    let timestamp = day + '/' + month + '/' + year;
 
-    socket.emit('client:message', {username, message});
+    socket.emit('client:message', {username, timestamp, message});
 })
 
 function renderProducts(productos) {
@@ -46,15 +51,10 @@ socket.on('server:products', productos => {
 })
 
 socket.on('server:message', messageArray => {
-    const date = new Date();
-    let day = String(date.getDate()).padStart(2, '0');
-    let month = String(date.getMonth() + 1).padStart(2, '0');
-    let year = date.getFullYear();
-    let fecha = day + '/' + month + '/' + year;
 
     messagePool.innerHTML = ""
     messageArray.forEach(messageInfo => {
-        messagePool.innerHTML += `<li style="color: brown;"> <b style="color: blue">${messageInfo.username}</b> [${fecha}]: <i style="color: green;">${messageInfo.message}</i> </li>`
+        messagePool.innerHTML += `<li style="color: brown;"> <b style="color: blue">${messageInfo.username}</b> [${messageInfo.timestamp}]: <i style="color: green;">${messageInfo.message}</i> </li>`
 
     })
 })

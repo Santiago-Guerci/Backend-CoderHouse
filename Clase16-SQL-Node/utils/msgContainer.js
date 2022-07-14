@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 class Mensajes {
     constructor(database, table) {
         this.database = database;

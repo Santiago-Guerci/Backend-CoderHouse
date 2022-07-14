@@ -10,10 +10,9 @@ class Contenedor {
 
     async save(object) {
         try {
-            await this.database(this.table).insert(object);
-            let newProductAdded = await this.database.from(this.table).select('id').max('id');
-            console.log(newProductAdded.id);
-            return newProductAdded.id;
+            const id = await this.database(this.table).insert(object);
+            object.id = id[0]
+            return object.id;
         } catch (err) {
             console.log(`Error saving object on table ${this.table}. Error: ${err}`);
             throw err;
@@ -34,7 +33,6 @@ class Contenedor {
     async getAll() {
         try {
             const allProducts = await this.database.from(this.table).select('*');
-            console.log(allProducts);
             return allProducts;
         } catch (err) {
             if(err.code === 'ER_NO_SUCH_TABLE') {
