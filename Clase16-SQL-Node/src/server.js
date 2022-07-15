@@ -2,12 +2,18 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const rutas = require('./routes/routes');
+
 const { Server: IOServer } = require('socket.io')
 const expressServer = app.listen(8080, () => { console.log('Server running on port') })
 const io = new IOServer(expressServer)
 
 //Levanta el html de public.
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, '../public')))
+
+app.use('/', rutas);
 
 //Traigo las clases de producto y mensajes.
 const Contenedor = require('../utils/prodContainer')
